@@ -6,11 +6,11 @@ def getSum(n, p):
     numList = []
     while tempNum > 10 :
         numList.append(tempNum % 10)
-        tempNum = tempNum // 10
+        tempNum = tempNum // 10 #"//" to perform division 
     numList.append(tempNum)
 
     for digit in reversed(numList): 
-        numSum = numSum + pow(digit, p)
+        numSum = numSum + pow(digit, p) #function to calculate power i.e. pow(number, power)
         p = p + 1
 
     return numSum
