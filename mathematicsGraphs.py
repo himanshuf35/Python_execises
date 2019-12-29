@@ -34,7 +34,7 @@ def plotPolyAndDiffPoly(x, y , ydiff):
     pyplot.show()
 
 x = numpy.arange(-10, 10, 0.1)
-polynomialTuple = (x, 1, [2, 1])
+polynomialTuple = (x, 3, [2, 1, 2,1])
 y, rep = makePoylnomial(polynomialTuple)
 print(rep)
 derivativePolynomial = diffPolynomial(polynomialTuple)
