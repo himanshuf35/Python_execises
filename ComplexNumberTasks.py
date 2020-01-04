@@ -22,3 +22,23 @@ plot({ z * (pow(math.e, ( (math.pi/4) * 1j))) for z in S})
 #Task 1.4.20
 def recenterOrigin(z): return (z.real - 83) + ((z.imag - 95) * 1j)
 plot({(recenterOrigin(z) * (pow(math.e, ( (math.pi/4) * 1j)))) * 0.5 for z in dataList}, 190, 1)
+
+#Problem 1.7.1
+# input: list of numbers and a positive integer.
+# output: list of numbers not containing a multiple of num.
+def my_filter(L, num): return [ ele for ele in L if ele % num != 0]
+
+#Problem 1.7.2
+# input: list L of non-negative integers.
+# output: a list of lists: for every element x in L create a list containing 1, 2, . . . , x.
+def my_Lists(L): return [ [x for x in range(1, ele+1)] for ele in L ]
+
+# Problem 1.7.3: my function composition(f,g)
+# input: two functions f and g, represented as dictionaries, such that g ◦ f exists.
+# output: dictionary that represents the function g ◦ f .
+def my_function_composition(f,g): return {fKey: g[f[fKey]] for fKey in f if f[fKey] in g}
+
+# Problem 1.7.12: Write a procedure transform(a,b, L) with the following spec:
+# • input: complex numbers a and b, and a list L of complex numbers
+# • output: the list of complex numbers obtained by applying f(z) = az + b to each complex number in L
+def transform(a, b, L): return[ (a * z) + b for z in L]
