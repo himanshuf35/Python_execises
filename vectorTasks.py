@@ -1,5 +1,5 @@
 from plotting import plot
-
+from VectorClass import Vec
 # Quiz 2.4.2: Write the translation “go east one mile and north two miles” as a function
 #  from 2-vectors to 2-vectors, using vector addition. Next, show the result of applying
 #  this function to the vectors [4, 4] and [−4, −4].
@@ -35,3 +35,50 @@ plot([scalar_vector_mult(-0.5, vector) for vector in L])
 
 def segement(pt1, pt2): return [addVector(scalar_vector_mult(alpha, pt1), scalar_vector_mult(1-alpha, pt2)) for alpha in [num/100 for num in range(100)]]
 tempList = segement([3.5, 3], [0.5,1])
+
+# Quiz 2.7.1: Write a procedure zero_vec(D) with the following spec:
+# • input: a set D
+# • output: an instance of Vec representing a D-vector all of whose entries have value zero
+
+def zero_vec(D): return Vec(D, {d:0 for d in D})
+
+# Quiz 2.7.2: Write a procedure getitem(v, d) with the following spec:
+# • input: an instance v of Vec, and an element d of the set v.D
+# • output: the value of entry d of v
+def setItem(v, d, val): v.f[d] = val
+def getItem(v, d): return v.f[d] if d in v.f else 0
+
+# Quiz 2.7.3: Write a procedure scalar_mul(v, alpha) with the following spec:
+# • input: an instance of Vec and a scalar alpha
+# • output: a new instance of Vec that represents the scalar-vector product alpha times v.
+
+def scalar_mul(v, alpha): return Vec(v.D, {d: alpha * v.f[d] for d in v.f})
+
+# Quiz 2.7.4: 
+# Write a procedure add(u, v) with the following spec:
+# • input: instances u and v of Vec
+# • output: an instance of Vec that is the vector sum of u and v
+
+def add(u, v): return Vec(u.D, {d: getItem(u, d) + getItem(v,d) for d in u.D})
+
+# Quiz 2.7.5:
+# Write a Python procedure neg(v) with the following spec: 
+# • input: an instance v of Vec
+# • output: a dictionary representing the negative of v
+
+def neg(v): return Vec(v.D, {d: -v.f[d] for d in v.f})
+
+# Quiz 2.9.4: 
+# Write a procedure list_dot(u, v) with the following spec:
+# • input: equal-length lists u and v of field elements
+# • output: the dot-product of u and v interpreted as vectors
+
+def list_dot(u, v): return sum( [u[iter] * v[iter] for iter in range(len(u))])
+
+# Quiz 2.9.15:
+# Write a procedure dot_product_list(needle,haystack) with the following spec:
+# • input: a short list needle and a long list haystack, both containing numbers
+# • output: a list of length len(haystack)-len(needle) such that entry i of the output list equals the dot-product of the needle with the equal-length sublist of haystack starting at position i
+
+def dot_product_list(needle,haystack): 
+    return [ list_dot(needle, haystack[i: i + len(needle)]) for i in range(len(haystack) - len(needle) + 1)]
