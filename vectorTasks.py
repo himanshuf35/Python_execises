@@ -82,3 +82,32 @@ def list_dot(u, v): return sum( [u[iter] * v[iter] for iter in range(len(u))])
 
 def dot_product_list(needle,haystack): 
     return [ list_dot(needle, haystack[i: i + len(needle)]) for i in range(len(haystack) - len(needle) + 1)]
+
+# Quiz 2.10.1: 
+# Write a procedure list2vec(L) with the following spec:
+# • input: a list L of field elements
+# • output: an instance v of Vec with domain {0, 1, 2, . . . , len(L) − 1} such that v[i] = L[i] for each integer i in the domain
+
+def list2vec(L): return Vec(set(range(len(L))), {index:item for index, item in enumerate(L)})
+
+# write a procedure triangular_solve_n(rowlist, b) with the following spec:
+# • input: for some integer n, a triangular system consisting of a list rowlist of n-vectors, and a length-n list b of numbers
+# • output: a vector xˆ such that, for i = 0, 1, . . . , n − 1, the dot-product of rowlist[i] with xˆ equals b[i]
+
+def triangular_solve_n(rowlist, b): 
+    D = rowlist[0].D
+    n = len(D)
+    assert D == set(range(n))
+    x = zero_vec(D)
+    for i in reversed(range(n)):
+        x[i] = (b[i] - (rowlist[i] * x)) / rowlist[i][i]
+    return x
+
+def triangular_solve(rowlist, lableList, b): 
+    D = rowlist[0].D
+    assert D == set(lableList)
+    x = zero_vec(D)
+    for index, label in enumerate(reversed(lableList)):
+        index = len(rowlist) - (index + 1)
+        x[label] = (b[index] - (rowlist[index] * x)) / rowlist[index][label]
+    return x
