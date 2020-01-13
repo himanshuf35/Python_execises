@@ -13,7 +13,8 @@ addVector([4, 4], translationVector)
 # Task 2.4.3:
 # Enter the procedure definition for 2-vector addition,
 #  and use a comprehension to plot the points obtained from L by adding [1, 2] to each:
-plot([addVector(v, translationVector) for v in L], 4)
+# plot([addVector(v, translationVector) for v in L], 4)
+
 
 # Quiz 2.5.3: 
 # Suppose we represent n-vectors by n-element lists. 
@@ -25,8 +26,8 @@ def scalar_vector_mult(alpha, vector): return [ alpha * vectorElement for vector
 # Plot the result of scaling the vectors in L by 0.5,
 # then plot the result of scaling them by -0.5.
 
-plot([scalar_vector_mult(0.5, vector) for vector in L])
-plot([scalar_vector_mult(-0.5, vector) for vector in L])
+# plot([scalar_vector_mult(0.5, vector) for vector in L])
+# plot([scalar_vector_mult(-0.5, vector) for vector in L])
 
 # Task 2.6.9:
 # python procedure segment(pt1, pt2) that, given points represented as 2-element lists,
@@ -74,6 +75,10 @@ def neg(v): return Vec(v.D, {d: -v.f[d] for d in v.f})
 # • output: the dot-product of u and v interpreted as vectors
 
 def list_dot(u, v): return sum( [u[iter] * v[iter] for iter in range(len(u))])
+
+def list_add(u, v): return [u[iter] + v[iter] for iter in range(len(u))]
+
+def list_scalar_mul(alpha, v): return [ alpha * vItem for vItem in v]
 
 # Quiz 2.9.15:
 # Write a procedure dot_product_list(needle,haystack) with the following spec:
