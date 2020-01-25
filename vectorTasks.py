@@ -43,24 +43,11 @@ tempList = segement([3.5, 3], [0.5,1])
 
 def zero_vec(D): return Vec(D, {d:0 for d in D})
 
-# Quiz 2.7.2: Write a procedure getitem(v, d) with the following spec:
-# • input: an instance v of Vec, and an element d of the set v.D
-# • output: the value of entry d of v
-def setItem(v, d, val): v.f[d] = val
-def getItem(v, d): return v.f[d] if d in v.f else 0
-
 # Quiz 2.7.3: Write a procedure scalar_mul(v, alpha) with the following spec:
 # • input: an instance of Vec and a scalar alpha
 # • output: a new instance of Vec that represents the scalar-vector product alpha times v.
 
 def scalar_mul(v, alpha): return Vec(v.D, {d: alpha * v.f[d] for d in v.f})
-
-# Quiz 2.7.4: 
-# Write a procedure add(u, v) with the following spec:
-# • input: instances u and v of Vec
-# • output: an instance of Vec that is the vector sum of u and v
-
-def add(u, v): return Vec(u.D, {d: getItem(u, d) + getItem(v,d) for d in u.D})
 
 # Quiz 2.7.5:
 # Write a Python procedure neg(v) with the following spec: 

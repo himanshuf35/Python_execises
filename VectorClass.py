@@ -1,7 +1,22 @@
+
+# from vectorTasks import add, setItem, getItem
+
+# Quiz 2.7.4: 
+# Write a procedure add(u, v) with the following spec:
+# • input: instances u and v of Vec
+# • output: an instance of Vec that is the vector sum of u and v
+
+def add(u, v): return Vec(u.D, {d: getItem(u, d) + getItem(v,d) for d in u.D})
+
+# Quiz 2.7.2: Write a procedure getitem(v, d) with the following spec:
+# • input: an instance v of Vec, and an element d of the set v.D
+# • output: the value of entry d of v
+def setItem(v, d, val): v.f[d] = val
+
+def getItem(v, d): return v.f[d] if d in v.f else 0
+
 # • f, the function, represented by a Python dictionary, and
 # • D, the domain of the function, represented by a Python set.
-from vectorTasks import add, setItem, getItem
-
 class Vec:
     def __init__(self, labels, function):
         self.D = labels
