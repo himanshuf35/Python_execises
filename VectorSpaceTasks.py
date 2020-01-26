@@ -7,6 +7,7 @@ vecList = [
     Vec(D, {'e1': 2, 'e2': 0, 'e3': 5, 'e4': 6}),
     Vec(D, {'e1': 1, 'e2': 0, 'e3': 8, 'e4': 0})
     ]
+vecDict = {1: vecList[0], 2: vecList[1], 4: vecList[2]}
 
 # Quiz 3.1.7: 
 # A procedure lin_comb(vlist, clist) with the following spec:
@@ -31,5 +32,18 @@ def vec_sum(veclist, D) : return sum(veclist, zero_vec(D))
 
 def vec_select_sum(veclist, D, k): return vec_sum(vec_select(veclist, k), D)
 
+# Problem 3.8.2:
+# A procedure scale_vecs(vecdict) for the following:
+# • input: A dictionary vecdict mapping positive numbers to vectors (instances of Vec)
+# • output: a list of vectors, one for each item in vecdict. If vecdict contains a key k mapping to a vector v, the output should contain the vector (1/k)v
 
-print(vec_select_sum(vecList, D, 'e2').f)
+def scale_vecs(vecdict): return [ (1/k) * vec for k, vec in vecdict.items() if k != 0] 
+
+# Problem 3.8.3:
+# A procedure GF2_span with the following spec:
+# • input: a set D of labels and a list L of vectors over GF(2) with label-set D 
+# • output: the list of all linear combinations of the vectors in L
+
+def GF2_span(D, L): 
+
+print([item.f for item in scale_vecs(vecDict)])
