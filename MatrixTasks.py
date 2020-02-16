@@ -57,7 +57,7 @@ def button_vectors(n):
 # You can use the procedure listlist2mat in the matutil module.
 # Since we are working over GF(2), you should use the value one from the GF2 module to represent 1.
 
-G = listlist2mat([
+GList = [
     [one, 0, one, one],
     [one, one, 0, one],
     [0, 0, 0, one],
@@ -65,21 +65,24 @@ G = listlist2mat([
     [0, 0, one, 0],
     [0, one, 0, 0],
     [one, 0, 0, 0]
-    ])
+    ]
+G = listlist2mat(GList)
 
-R = listlist2mat([
+RList = [
     [0, 0, one, 0, 0, 0, 0],
     [0, 0, 0, 0, 1, 0, 0],
     [0, 0, 0, 0, 0, one, 0],
     [0, 0, 0, 0, 0, 0, one] 
-])
+]
+R = listlist2mat(RList)
 
 #Hamming Code matrix
-H = listlist2mat([
+HList = [
     [0, 0, 0, one, one, one ,one ],
     [0, one, one, 0, 0, one, one],
     [one, 0, one, 0, one, 0, one]
-])   
+]
+H = listlist2mat(HList)   
 
 # Task 4.14.5:
 # A procedure find_error that takes an error syndrome and returns the corresponding error vector e.
