@@ -13,7 +13,7 @@ def getitem(M, k):
     0
     """
     assert k[0] in M.D[0] and k[1] in M.D[1]
-    pass
+    return M.f[k]
 
 def equal(A, B):
     """
@@ -169,7 +169,7 @@ def matrix_vector_mul(M, v):
     True
     """
     assert M.D[1] == v.D
-    pass
+    return Vec(M.D[0], {rowKey: sum([M[(rowKey, vectorKey)] * v[vectorKey] for vectorKey in v.D])  for rowKey in M.D[0]})
 
 def matrix_matrix_mul(A, B):
     """
@@ -198,7 +198,7 @@ def matrix_matrix_mul(A, B):
     True
     """
     assert A.D[1] == B.D[0]
-    pass
+    return Mat((A.D[0], B.D[1]), {(rowKeyA, columnKeyB): sum([A[(rowKeyA, columnKeyA)] * B[(columnKeyA, columnKeyB)] for columnKeyA in A.D[1]]) for rowKeyA in A.D[0] for columnKeyB in B.D[1]})
 
 ################################################################################
 

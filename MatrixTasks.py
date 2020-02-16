@@ -2,7 +2,8 @@
 from VectorClass import Vec
 from MatrixClass import Mat
 from gf2 import one
-from matutil import coldict2mat
+from matutil import coldict2mat, listlist2mat
+from vectorTasks import list2vec
 
 M=Mat(({'a','b'}, {'@', '#', '?'}), {('a','@'):1, ('a','#'):2, ('a','?'):3, ('b','@'):10, ('b','#'):20, ('b','?'):30})
 
@@ -52,6 +53,46 @@ def button_vectors(n):
     vecdict = {(i,j) : Vec(D,dict([((x,j),one) for x in range(max(i-1,0), min(i+2,n))] + [((i,y),one) for y in range(max(j-1,0), min(j+2,n))]))for (i,j) in D}
     return vecdict
 
-B = coldict2mat(button_vectors(2))
+# Task 4.14.1: Create an instance of Mat representing the generator matrix G.
+# You can use the procedure listlist2mat in the matutil module.
+# Since we are working over GF(2), you should use the value one from the GF2 module to represent 1.
 
-print(B.f)
+G = listlist2mat([
+    [one, 0, one, one],
+    [one, one, 0, one],
+    [0, 0, 0, one],
+    [one, one, one, 0],
+    [0, 0, one, 0],
+    [0, one, 0, 0],
+    [one, 0, 0, 0]
+    ])
+
+R = listlist2mat([
+    [0, 0, one, 0, 0, 0, 0],
+    [0, 0, 0, 0, 1, 0, 0],
+    [0, 0, 0, 0, 0, one, 0],
+    [0, 0, 0, 0, 0, 0, one] 
+])
+
+#Hamming Code matrix
+H = listlist2mat([
+    [0, 0, 0, one, one, one ,one ],
+    [0, one, one, 0, 0, one, one],
+    [one, 0, one, 0, one, 0, one]
+])   
+
+# Task 4.14.5:
+# A procedure find_error that takes an error syndrome and returns the corresponding error vector e.
+
+def find_error(e2): 
+    return 
+
+
+# print(list2vec([one, 0, 0, one]))
+# print(G[(0, 0)])
+# print(G * list2vec([one, 0, 0, one]))
+A = listlist2mat([[1, 2], [2, 3]])
+B = listlist2mat([[3, 4], [4, 5]])
+C = A * B
+T = H * G
+print(T.f)
