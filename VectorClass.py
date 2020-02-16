@@ -15,6 +15,14 @@ def setItem(v, d, val): v.f[d] = val
 
 def getItem(v, d): return v.f[d] if d in v.f else 0
 
+def checkEquality(A, B):
+    result = True
+    for dictKey in A.D:
+        if A[dictKey] != B[dictKey]:
+            result = False
+            break
+    return result
+
 # • f, the function, represented by a Python dictionary, and
 # • D, the domain of the function, represented by a Python set.
 class Vec:
@@ -38,6 +46,9 @@ class Vec:
 
     def __rmul__(self, alpha):
         return Vec(self.D, {alpha * item for item in self.f.values()})
+
+    def __eq__(self, other):
+        return self.D == other.D and checkEquality(self, other)
 
     def __str__(v):
         "pretty-printing"

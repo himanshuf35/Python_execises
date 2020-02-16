@@ -115,6 +115,7 @@ def transpose(M):
     >>> M.transpose() == Mt
     True
     """
+    return Mat((M.D[1], M.D[0]), {(rowL, columnL): v for (columnL, rowL), v in M.f.items()})
     pass
 
 def vector_matrix_mul(v, M):

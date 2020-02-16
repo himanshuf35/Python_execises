@@ -2,8 +2,8 @@
 from VectorClass import Vec
 from MatrixClass import Mat
 from gf2 import one
-from matutil import coldict2mat, listlist2mat
-from vectorTasks import list2vec
+from matutil import coldict2mat, listlist2mat, mat2coldict, coldict2mat
+from vectorTasks import list2vec, zero_vec
 
 M=Mat(({'a','b'}, {'@', '#', '?'}), {('a','@'):1, ('a','#'):2, ('a','?'):3, ('b','@'):10, ('b','#'):20, ('b','?'):30})
 
@@ -88,14 +88,42 @@ H = listlist2mat(HList)
 # A procedure find_error that takes an error syndrome and returns the corresponding error vector e.
 
 def find_error(e2): 
-    return 
+    Hc = H * e2
+    hColumnDic = mat2coldict(H)
+    errorVector = zero_vec(e2.D)
+    for dictKey in hColumnDic: 
+        if hColumnDic[dictKey] == Hc:
+            errorVector[dictKey] = one
+    return errorVector
 
+# Task 4.14.6
 
-# print(list2vec([one, 0, 0, one]))
-# print(G[(0, 0)])
-# print(G * list2vec([one, 0, 0, one]))
-A = listlist2mat([[1, 2], [2, 3]])
-B = listlist2mat([[3, 4], [4, 5]])
-C = A * B
-T = H * G
-print(T.f)
+def Task_error_vector():
+    _c = list2vec([one, 0, one, one, 0, one, one])
+    _e = find_error(_c)
+    c = _c + _e
+    cDecoded = R * c
+    print(cDecoded)
+
+# Task 4.14.7
+# A one-line procedure find_error_matrix with the following spec:
+# • input: a matrix S whose columns are error syndromes
+# • output: a matrix whose cth column is the error corresponding to the cth column of S.
+
+def find_error_matrix(S): return coldict2mat({dictKey: find_error(_c) for dictKey, _c in mat2coldict(S).items()})
+
+S = listlist2mat([
+    [one, 0],
+    [one, 0],
+    [one, one],
+    [0, 0],
+    [0, 0],
+    [0, 0],
+    [0, 0]
+])
+
+# for (dictKey, _c) in mat2coldict(S).items(): 
+#     print(_c)
+# print({dictKey: _c for (dictKey, _c) in mat2coldict(S).items()})
+E = find_error_matrix(S)
+print(E)
