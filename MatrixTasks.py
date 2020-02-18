@@ -4,6 +4,7 @@ from MatrixClass import Mat
 from gf2 import one
 from matutil import coldict2mat, listlist2mat, mat2coldict, coldict2mat
 from vectorTasks import list2vec, zero_vec
+from bitutil import str2bits, bits2str, bits2mat, mat2bits, noise
 
 M=Mat(({'a','b'}, {'@', '#', '?'}), {('a','@'):1, ('a','#'):2, ('a','?'):3, ('b','@'):10, ('b','#'):20, ('b','?'):30})
 
@@ -58,19 +59,19 @@ def button_vectors(n):
 # Since we are working over GF(2), you should use the value one from the GF2 module to represent 1.
 
 GList = [
-    [one, 0, one, one],
     [one, one, 0, one],
-    [0, 0, 0, one],
-    [one, one, one, 0],
-    [0, 0, one, 0],
+    [one, 0, one, one],
+    [one, 0, 0, 0],
+    [0, one, one, one],
     [0, one, 0, 0],
-    [one, 0, 0, 0]
+    [0, 0, one, 0],
+    [0, 0, 0, one],
     ]
 G = listlist2mat(GList)
 
 RList = [
     [0, 0, one, 0, 0, 0, 0],
-    [0, 0, 0, 0, 1, 0, 0],
+    [0, 0, 0, 0, one, 0, 0],
     [0, 0, 0, 0, 0, one, 0],
     [0, 0, 0, 0, 0, 0, one] 
 ]
@@ -122,8 +123,48 @@ S = listlist2mat([
     [0, 0]
 ])
 
-# for (dictKey, _c) in mat2coldict(S).items(): 
-#     print(_c)
-# print({dictKey: _c for (dictKey, _c) in mat2coldict(S).items()})
-E = find_error_matrix(S)
-print(E)
+# Task 4.14.8:
+# Try out str2bits(str) on the string s defined above, and verify that bits2str(L) gets you back the original string.
+
+s = ''.join([chr(i) for i in range(256)])
+b = str2bits(s)
+
+
+# Task 4.14.9:
+# Try converting a string to a list of bits to a matrix P and back to a string, and verify that you get the string you started with.
+
+P = bits2mat(b)
+_b = mat2bits(P)
+_s = bits2str(_b)
+
+# Task 4.14.10:
+# Putting these procedures together, compute the matrix P which represents the string ”I’m trying to free your mind,
+#  Neo. But I can only show you the door. You’re the one that has to walk through it.”
+
+s1 = "I’m trying to free your mind,Neo. But I can only show you the door. You’re the one that has to walk through it."
+b1 = str2bits(s1)
+P1 = bits2mat(b1)
+# print(P1)
+
+# Task 4.14.11:
+# To simulate the effects of the noisy channel when transmitting your matrix P , use noise(P, 0.02) to create a random matrix E.
+# The matrix E + P will introduce some errors. To see the effect of the noise, convert the perturbed matrix back to text.
+
+E = noise(P1, 0.02)
+N = P1 + E
+_b1 = mat2bits(N)
+_s1 = bits2str(_b1)
+
+# Task 4.14.12:
+# Encode the words represented by the columns of the matrix P, obtaining a matrix C.
+
+C = G * P1
+E1 = noise(C, 0.02)
+_C = E1 + C
+h = find_error_matrix(_C)
+
+_C1 = h + _C
+d = R * _C1
+o = mat2bits(d)
+_o = bits2str(o)
+print(_o)

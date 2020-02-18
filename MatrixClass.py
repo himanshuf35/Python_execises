@@ -13,7 +13,7 @@ def getitem(M, k):
     0
     """
     assert k[0] in M.D[0] and k[1] in M.D[1]
-    return M.f[k]
+    return M.f[k] if k in M.f else 0
 
 def equal(A, B):
     """
@@ -87,6 +87,7 @@ def add(A, B):
     True
     """
     assert A.D == B.D
+    return Mat(A.D, {key: A[key] + B[key] for key in [(d0, d1) for d0 in A.D[0] for d1 in A.D[1]]})
     pass
 
 def scalar_mul(M, x):
