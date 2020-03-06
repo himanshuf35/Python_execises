@@ -9,7 +9,7 @@ Updated by Nick Gaya, Spring 2013
 Requires: fields matutil
 """
 
-from gf2 import zero, one
+from GF2 import zero, one
 import MatrixClass
 import random
 

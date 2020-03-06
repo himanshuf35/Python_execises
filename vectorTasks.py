@@ -97,7 +97,7 @@ def triangular_solve_n(rowlist, b):
 
 def triangular_solve(rowlist, lableList, b): 
     D = rowlist[0].D
-    assert D == set(lableList)
+    assert D == set(lableList), 'Error here'
     x = zero_vec(D)
     for index, label in enumerate(reversed(lableList)):
         index = len(rowlist) - (index + 1)

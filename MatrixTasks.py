@@ -1,7 +1,7 @@
 
 from VectorClass import Vec
 from MatrixClass import Mat
-from gf2 import one
+from GF2 import one
 from matutil import coldict2mat, listlist2mat, mat2coldict, coldict2mat
 from vectorTasks import list2vec, zero_vec
 from bitutil import str2bits, bits2str, bits2mat, mat2bits, noise
