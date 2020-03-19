@@ -143,6 +143,7 @@ def vector_matrix_mul(v, M):
     >>> v3*M3 == Vec({0, 1},{0: 2, 1: 2})
     True
     """
+    return transpose(M) * v
     assert M.D[0] == v.D
     pass
 

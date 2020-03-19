@@ -4,7 +4,8 @@ from GF2 import one
 from matutil import coldict2mat, listlist2mat, mat2coldict, coldict2mat, rowdict2mat
 from vectorTasks import list2vec, zero_vec
 from bitutil import str2bits, bits2str, bits2mat, mat2bits, noise
-from solver import solve
+import solver
+import dis
 
 L = [[0,0,0],[1,0,0],[0,1,0],[1,1,0],[0,0,1],[1,0,1],[0,1,1],[1,1,1]]
 corners = [list2vec(v) for v in L]
@@ -70,8 +71,6 @@ rowDict = {
     8: w
     }
 
-pyFile = open('tempPy')
-print(pyFile.read())
 # print(rowDict)
 # L1Matrix = rowdict2mat(rowDict)
 # bVec = zero_vec(e)
@@ -80,7 +79,8 @@ print(pyFile.read())
 # print(bVec)
 # solve(L1Matrix, bVec)
 # print(solve) 
-# A = Mat(({'a','b'},{'A','B'}), {('a','A'):one, ('a','B'):one, ('b','B'):one})
-# b = Vec({'a','b'}, {'a':one})
-# x = solve(A, b)
-# print(x)
+A = Mat(({'a','b'},{'A','B'}), {('a','A'):one, ('a','B'):one, ('b','B'):one})
+b = Vec({'a','b'}, {'a':one})
+x = solver.solve(A, b)
+
+print(x)

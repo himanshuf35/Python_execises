@@ -34,6 +34,11 @@ class Vec:
     __getitem__ = getItem
     __setitem__ = setItem
 
+    def __neg__(self): 
+        return -1 * self
+
+    def __sub__(self,b): return self+(-b)
+
     def	__mul__(self, other): 
         if isinstance(other, Vec):
             dot_product = 0
@@ -45,7 +50,7 @@ class Vec:
             return NotImplemented  #  Will cause other.__rmul__(self) to be invoked
 
     def __rmul__(self, alpha):
-        return Vec(self.D, {alpha * item for item in self.f.values()})
+        return Vec(self.D, { key: alpha * self[key] for key in self.f})
 
     def __eq__(self, other):
         return self.D == other.D and checkEquality(self, other)

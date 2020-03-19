@@ -21,9 +21,8 @@ def _get_module():
     else:
         raise ImportError("Unsupported Python version")
     pycData = base64.decodebytes(pycData)
-    print(pycData.decode("utf-8"))
     pycFile = open('tempPy', 'wb')
-    # pycFile.write(pycData)
+    pycFile.write(pycData[offset:])
     try:
         pyObject = marshal.loads(pycData[offset:])
         return pyObject
