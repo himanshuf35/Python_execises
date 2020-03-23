@@ -2,6 +2,7 @@ from VectorClass import Vec
 from cancer_data import read_training_data
 from matutil import mat2rowdict, listlist2mat
 from vectorTasks import zero_vec, list2vec
+from orthogonality import QR_solve
 
 (A, b) = read_training_data('train.data')
 (C, d) = read_training_data('validate.data')
@@ -35,7 +36,10 @@ def gradient_descent(A, b, w, sigma, T):
     return  w
 
 
-wG = gradient_descent(A, b, w, 0.000000001, 300)
-print(fraction_wrong(C, d, w))
-print(fraction_wrong(C, d, wG))
+Q, R = QR_solve(A, b)
+print(Q.D[0], Q.D[1])
+# print(len(A.D[0]), len(A.D[1]))
+# wG = gradient_descent(A, b, w, 0.000000001, 300)
+# print(fraction_wrong(C, d, w))
+# print(fraction_wrong(C, d, wG))
 
